@@ -11,7 +11,10 @@ function getComputerChoice() {
 }
 
 function playRound (playerSelection, computerSelection) {
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+    playerSelection =
+        playerSelection.charAt(0).toUpperCase() +
+        playerSelection.slice(1).toLowerCase();
+        
     if (playerSelection === 'Rock') {
         if (computerSelection === 'Rock') {
             console.log('Tie! Rock cancels Rock');
