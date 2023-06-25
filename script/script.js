@@ -94,11 +94,13 @@ playerSelections.forEach((selection) => {
         computerScore.textContent = `Computer Score: ${computerWins}`;
 
         if (playerWins > 4) {
-            displayMatch.textContent = `You win! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
+            displayRound.textContent = '';
+            displayMatch.textContent = `Match Won!: (Player) ${playerWins} - (Computer) ${computerWins}`;
             playAgain.toggleAttribute('hidden');
             selections.toggleAttribute('hidden');
         } else if (computerWins > 4) {
-            displayMatch.textContent =  `You lose! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
+            displayRound.textContent = '';
+            displayMatch.textContent =  `Match Lost! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
             playAgain.toggleAttribute('hidden');
             selections.toggleAttribute('hidden');
         }
