@@ -55,26 +55,54 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerWins = 0;
-    let  computerWins = 0;
-    for (i = 0; i < 5; i++) {
-        const playerSelection = prompt('Rock, paper, or scissors: ');
-        const computerSelection = getComputerChoice();
-        let roundResult = playRound(playerSelection, computerSelection);
+const playerSelections = document.querySelectorAll('.selection');
+
+let playerWins = 0;
+let computerWins = 0;
+
+let playerScore = document.querySelector('.playerScore');
+let computerScore = document.querySelector('.computerScore');
+let displayRound = document.querySelector('.displayRound');
+let displayMatch = document.querySelector('.displayMatch');
+let selections = document.querySelector('.selections');
+let playAgain = document.querySelector('.playAgain');
+
+playAgain.addEventListener('click', (e) => {
+    playerWins = 0;
+    computerWins = 0;
+    displayMatch.textContent = '';
+    playAgain.toggleAttribute('hidden');
+    selections.toggleAttribute('hidden');
+});
+
+playerSelections.forEach((selection) => {
+    selection.addEventListener('click', (e) => {
+        let computerChoice = getComputerChoice();
+
+        let roundResult = playRound(selection.textContent, computerChoice);
         if (roundResult === 1) {
+            displayRound.textContent = `You Win! ${selection.textContent} beats ${computerChoice}`;
             playerWins++;
         } else if (roundResult === 2) {
+            displayRound.textContent = `You Lose! ${computerChoice} beats ${selection.textContent}`;
             computerWins++;
+        } else {
+            displayRound.textContent = `Tie! ${computerChoice} cancels ${selection.textContent}`;
         }
-    }
-    if (playerWins > computerWins) {
-        return `You win! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
-    } else if (playerWins < computerWins) {
-        return `You lose! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
-    } else {
-        return `Tie! Score: (Player) ${playerWins} - (Computer) ${computerWins}`
-    }
-}
 
-console.log(game());
+        playerScore.textContent = `Player Score: ${playerWins}`;
+        computerScore.textContent = `Computer Score: ${computerWins}`;
+
+        if (playerWins > 4) {
+            displayMatch.textContent = `You win! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
+            playAgain.toggleAttribute('hidden');
+            selections.toggleAttribute('hidden');
+        } else if (computerWins > 4) {
+            displayMatch.textContent =  `You lose! Score: (Player) ${playerWins} - (Computer) ${computerWins}`;
+            playAgain.toggleAttribute('hidden');
+            selections.toggleAttribute('hidden');
+        }
+    });
+});
+
+// console.log(game());
