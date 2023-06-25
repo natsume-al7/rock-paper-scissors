@@ -70,6 +70,8 @@ let playAgain = document.querySelector('.playAgain');
 playAgain.addEventListener('click', (e) => {
     playerWins = 0;
     computerWins = 0;
+    playerScore.textContent = `Player Score: ${playerWins}`;
+    computerScore.textContent = `Computer Score: ${computerWins}`;
     displayMatch.textContent = '';
     playAgain.toggleAttribute('hidden');
     selections.toggleAttribute('hidden');
